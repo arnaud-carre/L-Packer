@@ -38,6 +38,7 @@ Usage:
 Options:
         -t<x> : target size limit in KiB
         -pad : add random bytes to pad up to the target size
+		-noflash : remove color flash when depacking
         -v : verbose mode
 ````
 
