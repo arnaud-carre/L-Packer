@@ -1,0 +1,6 @@
+v0.91 (2025/11/11)
+	- added "-noflash" option
+	- fix some Atari depack-in place crash when no BSS
+
+v0.90
+	- first public release

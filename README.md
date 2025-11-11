@@ -1,4 +1,4 @@
-# L-Packer v0.9
+# L-Packer v0.91
 
 L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both Atari and Amiga systems!
 
