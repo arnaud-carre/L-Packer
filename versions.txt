@@ -1,3 +1,6 @@
+v0.92 (2025/11/12)
+	- added Amiga depack in-place support
+
 v0.91 (2025/11/11)
 	- added "-noflash" option
 	- fix some Atari depack-in place crash when no BSS

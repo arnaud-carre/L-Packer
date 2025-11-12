@@ -1,4 +1,4 @@
-# L-Packer v0.91
+# L-Packer v0.92
 
 L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both Atari and Amiga systems!
 
@@ -19,6 +19,7 @@ That’s where the idea for L-Packer came from!
 * Supports both Atari and Amiga executables with a single tool
 * Currently supports Deflate and ZX0 algorithms (more to come)
 * Uses multi-threading to compress hunks with several algorithms in parallel for maximum speed
+* Ability to pad final executable with random bytes
 
 ## Use Case
 
@@ -55,10 +56,8 @@ Pack Colombia.exe, aiming 64KiB demo category, and pad to 64KiB using random byt
 
 ## Known Limitations
 
-* Version 0.9 is a beta release — please test it and report any issues on GitHub.
-* The Atari version is nearly complete and already supports depack-in-place.
+* Version 0.92 is a beta release — please test it and report any issues on GitHub.
 * The Amiga version doesn’t yet have a fully compatible bootstrap, so please test it with your demo and share feedback.
-* Depack-in-place for the Amiga version is not yet supported (but coming soon).
 
 ## Source Code
 
