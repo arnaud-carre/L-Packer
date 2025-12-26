@@ -17,7 +17,6 @@ That’s where the idea for L-Packer came from!
 * Automatically try 3 compression algorithms on your exe (deflate, zx0, LZ4)
 * Chooses the best algorithm for your target size (selecting the fastest depacker when possible)
 * Supports both Atari and Amiga executables with a single tool
-* Currently supports Deflate and ZX0 algorithms (more to come)
 * Uses multi-threading to compress hunks with several algorithms in parallel for maximum speed
 * Ability to pad final executable with random bytes
 
