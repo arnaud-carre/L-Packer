@@ -1,3 +1,7 @@
+v0.93 (2025/12/26)
+	- added LZ4 compression algorithm
+	- added option to force one of 3 compression algorithms
+
 v0.92 (2025/11/12)
 	- added Amiga depack in-place support
 
