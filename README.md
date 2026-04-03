@@ -1,6 +1,6 @@
 # L-Packer v0.96
 
-L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both Atari and Amiga systems!
+L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both **Atari** and **Amiga** systems!
 
 ## The Idea
 
@@ -56,10 +56,9 @@ Pack Colombia.exe, aiming 64KiB demo category, and pad to 64KiB using random byt
   L-Packer Colombia.exe Colombia_packed.exe -t64 -pad
 ````
 
-## Known Limitations
+## Already in production
 
-* Version 0.93 is a beta release — please test it and report any issues on GitHub.
-* The Amiga version doesn’t yet have a fully compatible bootstrap, so please test it with your demo and share feedback.
+Few demos are already using L-Packer, [check the list!]( https://www.pouet.net/lists.php?which=326 )
 
 ## Source Code
 
