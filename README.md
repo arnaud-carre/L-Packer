@@ -1,4 +1,4 @@
-# L-Packer v0.97
+# L-Packer v0.98
 
 L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both **Atari** and **Amiga** systems!
 
@@ -19,6 +19,7 @@ That’s where the idea for L-Packer came from!
 * Supports both Atari and Amiga executables with a single tool
 * Uses multi-threading to compress hunks with several algorithms in parallel for maximum speed
 * Ability to pad final executable with random bytes
+* also supports raw -data mode
 
 ## Use Case
 
@@ -30,7 +31,7 @@ It consistently beats UPX and Cranker in compression ratio, and can decompress a
 ## Usage
 
 ````
-L-Packer v0.93(beta) by Leonard/Oxygene
+L-Packer v0.98(beta) by Leonard/Oxygene
 Atari & Amiga executable cruncher
 
 Usage:
@@ -39,6 +40,7 @@ Options:
         -t<x> : target size limit in KiB
         -pad : add random bytes to pad up to the target size
         -noflash : remove color flash when depacking
+        -data : raw data mode (no executable)
         -deflate : force DEFLATE as unique algorithm
         -zx0 : force ZX0 as unique algorithm
         -lz4 : force LZ4 as unique algorithm
@@ -59,6 +61,10 @@ Pack Colombia.exe, aiming 64KiB demo category, and pad to 64KiB using random byt
 ## Already in production
 
 Few demos are already using L-Packer, [check the list!]( https://www.pouet.net/lists.php?which=326 )
+
+## Raw data mode
+
+L-Packer is made to compress Amiga or Atari executables. But it can also used to pack raw data. It will also select the best algorithm and save a raw packed file.
 
 ## Source Code
 
