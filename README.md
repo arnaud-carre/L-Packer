@@ -1,4 +1,4 @@
-# L-Packer v0.98
+# L-Packer v0.99
 
 L-Packer is an executable compressor designed for 64K-style demos. Since I couldn’t choose between my two favorite platforms, L-Packer works on both **Atari** and **Amiga** systems!
 
@@ -14,7 +14,7 @@ That’s where the idea for L-Packer came from!
 ## Key Features
 
 * Balances good compression ratio with decent decompression speed
-* Automatically try 3 compression algorithms on your exe (deflate, zx0, LZ4)
+* Automatically try up to 3 compression algorithms on your exe (deflate, zx0, LZ4)
 * Chooses the best algorithm for your target size (selecting the fastest depacker when possible)
 * Supports both Atari and Amiga executables with a single tool
 * Uses multi-threading to compress hunks with several algorithms in parallel for maximum speed
@@ -31,19 +31,19 @@ It consistently beats UPX and Cranker in compression ratio, and can decompress a
 ## Usage
 
 ````
-L-Packer v0.98(beta) by Leonard/Oxygene
+L-Packer v0.99(beta) by Leonard/Oxygene
 Atari & Amiga executable cruncher
 
 Usage:
         L-Packer <src> <dst> [-options]
 Options:
-        -t<x> : target size limit in KiB
+        -t<x> : target size limit in KiB (ex -t64)
         -pad : add random bytes to pad up to the target size
         -noflash : remove color flash when depacking
         -data : raw data mode (no executable)
-        -deflate : force DEFLATE as unique algorithm
-        -zx0 : force ZX0 as unique algorithm
-        -lz4 : force LZ4 as unique algorithm
+        -deflate : include DEFLATE algorithm (by default)
+        -zx0 : include ZX0 algorithm (by default)
+        -lz4 : include LZ4 algorithm (by default)
         -v : verbose mode
 ````
 
@@ -57,6 +57,12 @@ Pack Colombia.exe, aiming 64KiB demo category, and pad to 64KiB using random byt
 ````
   L-Packer Colombia.exe Colombia_packed.exe -t64 -pad
 ````
+
+Pack raw data mydata.bin, including both LZ4 and ZX0 algorithms and save the best result
+````
+  L-Packer -data -lz4 -zx0 mydata.bin mydata.lpk
+````
+
 
 ## Already in production
 
