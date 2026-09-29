@@ -1,0 +1,87 @@
+name: Release binaries
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            platform: win
+            binary_dir: build/Release
+            binary: L-Packer.exe
+            cmake_args: -A x64
+          - os: ubuntu-24.04
+            platform: ubuntu
+            binary_dir: build
+            binary: L-Packer
+            cmake_args: ''
+          - os: macos-14
+            platform: macos
+            binary_dir: build
+            binary: L-Packer
+            cmake_args: '-DCMAKE_OSX_ARCHITECTURES=arm64'
+
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v4
+
+      - name: Configure Release build
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release ${{ matrix.cmake_args }}
+
+      - name: Build L-Packer
+        run: cmake --build build --config Release --target L-Packer --parallel 2
+
+      - name: Package executable
+        working-directory: ${{ matrix.binary_dir }}
+        shell: pwsh
+        run: |
+          cmake -E tar cf "$env:GITHUB_WORKSPACE/L-Packer-${{ matrix.platform }}.zip" --format=zip -- "${{ matrix.binary }}"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: L-Packer-${{ matrix.platform }}
+          path: L-Packer-${{ matrix.platform }}.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish release archives
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download archives
+        uses: actions/download-artifact@v4
+        with:
+          pattern: L-Packer-*
+          path: dist
+          merge-multiple: true
+
+      - name: Create release or update its assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if gh release view "$RELEASE_TAG" > /dev/null 2>&1; then
+            gh release upload "$RELEASE_TAG" dist/*.zip --clobber
+          else
+            gh release create "$RELEASE_TAG" dist/*.zip --verify-tag --generate-notes
+          fi

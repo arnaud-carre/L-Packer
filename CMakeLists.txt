@@ -65,6 +65,9 @@ if(UNIX)
 endif()
 
 if(MSVC)
+    # Link the runtime statically (/MT for Release, /MTd for Debug).
+    set_property(TARGET L-Packer PROPERTY
+        MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
     target_compile_options(L-Packer PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:/utf-8>")
 endif()
 
